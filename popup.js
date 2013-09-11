@@ -24,6 +24,7 @@ function addHNResult(result) {
 
 function searchReddit(search_url) {
   $.getJSON("http://www.reddit.com/search.json", {q: 'url:' + search_url}, function(data) {
+    $('#redditresults').html('');
     $.each(data.data.children, function(i, result) {
       addRedditResult(result);
     });
@@ -40,7 +41,7 @@ function searchHN(search_url) {
     search_url = removeSchema[2];
   }
   $.getJSON("http://api.thriftdb.com/api.hnsearch.com/items/_search", {filter: { queries: ["url:(*" + search_url + "*)"]}}, function(data) {
-    window.data = data;
+    $('#hnresults').html('');
     $.each(data.results, function(i, result) {
       addHNResult(result);
     });
